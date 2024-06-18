@@ -1,0 +1,31 @@
+services:
+
+  wordpress:
+    image: wordpress-postgress-docker
+    restart: unless-stopped
+    environment:
+      WORDPRESS_DB_HOST: pg
+      WORDPRESS_DB_USER: wordpress
+      WORDPRESS_DB_PASSWORD: wordpress
+      WORDPRESS_DB_NAME: wordpress
+    volumes:
+      - ./wordpress-data:/var/www/html
+
+  pg:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: wordpress
+      POSTGRES_USER: wordpress
+      POSTGRES_PASSWORD: wordpress
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+
+  nginx:
+    image: nginx:mainline-alpine
+    restart: unless-stopped
+    ports:
+      - "9876:80"
+    volumes:
+      - ./wordpress-data:/var/www/html
+      - ./nginx-conf:/etc/nginx/conf.d
