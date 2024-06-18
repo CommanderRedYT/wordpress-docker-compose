@@ -25,7 +25,7 @@ services:
     image: nginx:mainline-alpine
     restart: unless-stopped
     ports:
-      - "9876:80"
+      - "127.0.0.1:9876:80"
     volumes:
       - ./wordpress-data:/var/www/html
       - ./nginx-conf:/etc/nginx/conf.d
