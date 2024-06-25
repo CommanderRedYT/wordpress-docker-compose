@@ -1,7 +1,6 @@
 services:
-
   wordpress:
-    image: wordpress-postgress-docker
+    image: "ghcr.io/commanderredyt/wordpress-postgresql-docker:latest"
     restart: unless-stopped
     environment:
       WORDPRESS_DB_HOST: pg
