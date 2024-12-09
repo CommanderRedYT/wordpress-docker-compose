@@ -19,6 +19,7 @@ services:
       POSTGRES_PASSWORD: wordpress
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 
   nginx:
     image: nginx:mainline-alpine
