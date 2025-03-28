@@ -1,7 +1,7 @@
 services:
   wordpress:
     image: "ghcr.io/commanderredyt/wordpress-postgresql-docker:latest"
-    restart: unless-stopped
+    restart: always
     environment:
       WORDPRESS_DB_HOST: pg
       WORDPRESS_DB_USER: wordpress
@@ -9,21 +9,21 @@ services:
       WORDPRESS_DB_NAME: wordpress
     volumes:
       - ./wordpress-data:/var/www/html
+      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 
   pg:
     image: postgres:16
-    restart: unless-stopped
+    restart: always
     environment:
       POSTGRES_DB: wordpress
       POSTGRES_USER: wordpress
       POSTGRES_PASSWORD: wordpress
     volumes:
       - ./pgdata:/var/lib/postgresql/data
-      - ./uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
 
   nginx:
     image: nginx:mainline-alpine
-    restart: unless-stopped
+    restart: always
     ports:
       - "127.0.0.1:9876:80"
     volumes:
